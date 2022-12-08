@@ -4,11 +4,23 @@ import Header from '../components/Header'
 import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/solid"
 import { SearchIcon } from "@heroicons/react/solid"
 import Footer from '../components/Footer'
-
+import { useRouter} from "next/router"
+import { useRef } from 'react'
 
 
 
 export default function Home() {
+  const router = useRouter()
+  const searchInput = useRef(null)
+  function search(event) {
+    event.preventDefault()
+    const term = searchInput.current.value
+    //trim is used to avoid unnnecessary spaces 
+    if (!term.trim()) return 
+    router.push(`/search?term=${term.trim()}`)
+  }
+
+
   return (
     <div>
       <Head>
@@ -31,18 +43,21 @@ export default function Home() {
         />
         <div className="flex mt-5 w-full border mx-auto max-w-[90%] border-gray-200  hover:shadow-lg focus-within:shadow-lg px-5 py-3 rounded-full items-center sm:max-w-xl lg:max-w-2xl">
           <SearchIcon className="h-5 text-gray-500 mr-3" />
-          <input type="text" className="flex-grow focus:outline-none " />
+          <input
+            ref={searchInput}
+            type="text"
+            className="flex-grow focus:outline-none "
+          />
           <MicrophoneIcon className="h-5" />
         </div>
         <div className=" flex flex-col sm:flex-row w-[50%] space-y-2 mt-8 sm:space-y-0 sm:space-x-4 justify-center">
-          <button>Google Search</button>
+          <button onClick={search}>Google Search</button>
           <button> I am feeling lucky</button>
         </div>
       </form>
 
       {/* Footer */}
-      <Footer/>
-
+      <Footer />
     </div>
   )
 }
