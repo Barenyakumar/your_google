@@ -18,6 +18,7 @@ export default function Home() {
     //trim is used to avoid unnnecessary spaces 
     if (!term.trim()) return 
     router.push(`/search?term=${term.trim()}`)
+    console.log("Searched term: " + term)
   }
 
 
