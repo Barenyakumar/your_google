@@ -17,7 +17,7 @@ export default function Home() {
     const term = searchInput.current.value
     //trim is used to avoid unnnecessary spaces 
     if (!term.trim()) return 
-    router.push(`/search?term=${term.trim()}`)
+    router.push(`/search?term=${term.trim()}&searchType=`)
     console.log("Searched term: " + term)
   }
 

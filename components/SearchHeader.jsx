@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useRef } from "react";
 import { MagnifyingGlassIcon, MicrophoneIcon, SearchIcon, XIcon } from "@heroicons/react/solid"
 import User from "./User";
+import SearchHeaderOptions from "./SearchHeaderOptions";
 
 
 export default function SearchHeader() {
@@ -13,7 +14,7 @@ export default function SearchHeader() {
     const term = searchInputRef.current.value
     //to trim all spaces even if there is no term then return 
     if (!term.trim()) return
-    router.push(`/search?term=${term.trim()}`)
+    router.push(`/search?term=${term.trim()}&searchType=`)
   }
 
   return (
@@ -41,7 +42,10 @@ export default function SearchHeader() {
           <button onClick={search} type="submit" hidden></button>
         </form>
         <User className="ml-auto whitespace-nowrap" />
+
       </div>
+
+      <SearchHeaderOptions/>
     </header>
   )
 }
